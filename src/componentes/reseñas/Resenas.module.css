@@ -1,0 +1,89 @@
+.resenas {
+    padding: 110px 8%;
+    background: #ffffff;
+    text-align: center;
+}
+
+.resenas h2 {
+    color: #07182D;
+    font-size: 46px;
+    margin-bottom: 18px;
+}
+
+.subtitulo {
+    max-width: 760px;
+    margin: 0 auto 70px;
+    color: #666;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.tarjeta {
+    background: #f8f9fb;
+    border-radius: 22px;
+    padding: 35px 30px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+    border: 1px solid rgba(0, 0, 0, .05);
+    transition: all .35s ease;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+}
+
+.tarjeta:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .12);
+}
+
+.estrellas {
+    color: #D4AF37;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.tarjeta p {
+    color: #555;
+    line-height: 30px;
+    font-size: 16px;
+    margin: 0 auto 25px;
+}
+
+.tarjeta h4 {
+    color: #07182D;
+    font-size: 18px;
+    margin: 0 0 8px;
+}
+
+.pais {
+    color: #777;
+    font-size: 15px;
+}
+
+@media (max-width: 768px) {
+
+    .resenas {
+        padding: 90px 25px;
+    }
+
+    .resenas h2 {
+        font-size: 36px;
+    }
+
+    .subtitulo {
+        margin-bottom: 50px;
+    }
+
+    .contenedor {
+        grid-template-columns: 1fr;
+    }
+
+}
