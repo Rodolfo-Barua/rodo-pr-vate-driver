@@ -1,140 +1,186 @@
+import { useState } from "react";
 import estilos from "./Resenas.module.css";
 
 function Resenas() {
-return (
-    <section id="resenas" className={estilos.resenas}>
+    const [reseña, setReseña] = useState({
+        nombre: "",
+        pais: "",
+        calificacion: "5",
+        comentario: "",
+    });
 
-    <h2>Lo que dicen nuestros pasajeros</h2>
+    const manejarCambio = (e) => {
+        const { name, value } = e.target;
 
-    <p className={estilos.subtitulo}>
-        La experiencia de quienes confiaron en nuestro servicio.
-    </p>
+        setReseña({
+            ...reseña,
+            [name]: value,
+        });
+    };
 
-    <div className={estilos.contenedor}>
+    const enviarReseña = (e) => {
+        e.preventDefault();
 
-        <div className={estilos.tarjeta}>
+        const estrellas = "⭐".repeat(Number(reseña.calificacion));
 
-        <div className={estilos.estrellas}>
-            ★★★★★
-        </div>
+        const texto = `Hola Rodo, quiero dejar una reseña sobre mi experiencia con Rodo Private Driver.
 
-        <p>
-            "Excelente servicio. Muy puntual, el vehículo impecable y el
-            recorrido fue muy cómodo. Totalmente recomendable."
-        </p>
+👤 Nombre: ${reseña.nombre}
+🌎 País: ${reseña.pais || "No especificado"}
+⭐ Calificación: ${estrellas}
 
-        <h4>María G.</h4>
+💬 Reseña:
+${reseña.comentario}`;
 
-        <span className={estilos.pais}>
-            🇪🇸 España
-        </span>
+        const mensajeCodificado = encodeURIComponent(texto);
 
-        </div>
+        window.open(
+            `https://wa.me/5491124627189?text=${mensajeCodificado}`,
+            "_blank"
+        );
+    };
 
+    return (
+        <section id="resenas" className={estilos.resenas}>
 
-        <div className={estilos.tarjeta}>
+            <h2>Lo que dicen nuestros pasajeros</h2>
 
-        <div className={estilos.estrellas}>
-            ★★★★★
-        </div>
+            <p className={estilos.subtitulo}>
+                Muy pronto compartiremos las experiencias de quienes
+                hayan confiado en Rodo Private Driver.
+            </p>
 
-        <p>
-            "Utilizamos el servicio para recorrer Buenos Aires y la experiencia
-            fue excelente. Muy amable y profesional."
-        </p>
+            <div className={estilos.contenedor}>
 
-        <h4>John S.</h4>
+                <div className={estilos.tarjeta}>
 
-        <span className={estilos.pais}>
-            🇺🇸 Estados Unidos
-        </span>
+                    <div className={estilos.estrellas}>
+                        ★★★★★
+                    </div>
 
-        </div>
+                    <p>
+                        Tu experiencia puede formar parte de esta sección.
+                    </p>
 
+                    <span className={estilos.pais}>
+                        Esperamos tu reseña
+                    </span>
 
-        <div className={estilos.tarjeta}>
+                </div>
 
-        <div className={estilos.estrellas}>
-            ★★★★★
-        </div>
+            </div>
 
-        <p>
-            "Muy buena atención desde el primer contacto hasta el final del
-            viaje. Sin dudas volveríamos a contratar el servicio."
-        </p>
+            <div className={estilos.formularioResena}>
 
-        <h4>Carlos R.</h4>
+                <h3>¿Viajaste con nosotros?</h3>
 
-        <span className={estilos.pais}>
-            🇦🇷 Argentina
-        </span>
+                <p>
+                    Nos gustaría conocer tu experiencia.
+                </p>
 
-        </div>
+                <form onSubmit={enviarReseña}>
 
+                    <div className={estilos.grupoResena}>
 
-        <div className={estilos.tarjeta}>
+                        <label htmlFor="nombre">
+                            Nombre
+                        </label>
 
-        <div className={estilos.estrellas}>
-            ★★★★★
-        </div>
+                        <input
+                            id="nombre"
+                            name="nombre"
+                            type="text"
+                            placeholder="Tu nombre"
+                            value={reseña.nombre}
+                            onChange={manejarCambio}
+                            required
+                        />
 
-        <p>
-            "Un servicio muy profesional y puntual. Fue una excelente manera
-            de conocer Buenos Aires con tranquilidad."
-        </p>
+                    </div>
 
-        <h4>Sophie M.</h4>
+                    <div className={estilos.grupoResena}>
 
-        <span className={estilos.pais}>
-            🇫🇷 Francia
-        </span>
+                        <label htmlFor="pais">
+                            País
+                        </label>
 
-        </div>
+                        <input
+                            id="pais"
+                            name="pais"
+                            type="text"
+                            placeholder="Ej: Argentina"
+                            value={reseña.pais}
+                            onChange={manejarCambio}
+                        />
 
+                    </div>
 
-        <div className={estilos.tarjeta}>
+                    <div className={estilos.grupoResena}>
 
-        <div className={estilos.estrellas}>
-            ★★★★★
-        </div>
+                        <label htmlFor="calificacion">
+                            Calificación
+                        </label>
 
-        <p>
-            "Excelente experiencia. Muy cómodo el traslado y una atención
-            impecable durante todo el recorrido."
-        </p>
+                        <select
+                            id="calificacion"
+                            name="calificacion"
+                            value={reseña.calificacion}
+                            onChange={manejarCambio}
+                        >
+                            <option value="5">
+                                ★★★★★ - Excelente
+                            </option>
 
-        <h4>Luca B.</h4>
+                            <option value="4">
+                                ★★★★☆ - Muy bueno
+                            </option>
 
-        <span className={estilos.pais}>
-            🇮🇹 Italia
-        </span>
+                            <option value="3">
+                                ★★★☆☆ - Bueno
+                            </option>
 
-        </div>
+                            <option value="2">
+                                ★★☆☆☆ - Regular
+                            </option>
 
+                            <option value="1">
+                                ★☆☆☆☆ - Malo
+                            </option>
+                        </select>
 
-        <div className={estilos.tarjeta}>
+                    </div>
 
-        <div className={estilos.estrellas}>
-            ★★★★★
-        </div>
+                    <div className={estilos.grupoResena}>
 
-        <p>
-            "Muy recomendable para quienes visitan Buenos Aires. Puntualidad,
-            comodidad y excelente trato."
-        </p>
+                        <label htmlFor="comentario">
+                            Tu experiencia
+                        </label>
 
-        <h4>Anna P.</h4>
+                        <textarea
+                            id="comentario"
+                            name="comentario"
+                            rows="5"
+                            placeholder="Contanos cómo fue tu experiencia..."
+                            value={reseña.comentario}
+                            onChange={manejarCambio}
+                            required
+                        />
 
-        <span className={estilos.pais}>
-            🇩🇪 Alemania
-        </span>
+                    </div>
 
-        </div>
+                    <button
+                        type="submit"
+                        className={estilos.botonResena}
+                    >
+                        ⭐ Enviar mi reseña por WhatsApp
+                    </button>
 
-    </div>
+                </form>
 
-    </section>
-);
+            </div>
+
+        </section>
+    );
 }
 
 export default Resenas;

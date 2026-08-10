@@ -68,6 +68,90 @@
     font-size: 15px;
 }
 
+
+/* FORMULARIO DE RESEÑAS */
+
+.formularioResena {
+    max-width: 650px;
+    margin: 70px auto 0;
+    padding: 40px;
+    background: #f8f9fb;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+    border: 1px solid rgba(0, 0, 0, .05);
+}
+
+.formularioResena h3 {
+    color: #07182D;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.formularioResena > p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.grupoResena {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.grupoResena label {
+    color: #07182D;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.grupoResena input,
+.grupoResena select,
+.grupoResena textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+.grupoResena textarea {
+    resize: vertical;
+}
+
+.grupoResena input:focus,
+.grupoResena select:focus,
+.grupoResena textarea:focus {
+    outline: none;
+    border-color: #D4AF37;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, .15);
+}
+
+.botonResena {
+    width: 100%;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 40px;
+    background: #D4AF37;
+    color: #07182D;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .35s;
+}
+
+.botonResena:hover {
+    transform: translateY(-3px);
+    background: #EBC14A;
+    box-shadow: 0 12px 25px rgba(212, 175, 55, .30);
+}
+
+
+/* RESPONSIVE */
+
 @media (max-width: 768px) {
 
     .resenas {
@@ -86,4 +170,17 @@
         grid-template-columns: 1fr;
     }
 
+    .formularioResena {
+        padding: 30px 20px;
+        margin-top: 50px;
+    }
+
+    .formularioResena h3 {
+        font-size: 24px;
+    }
+
+    .botonResena {
+        font-size: 15px;
+        padding: 14px 20px;
+    }
 }
