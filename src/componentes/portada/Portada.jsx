@@ -1,40 +1,52 @@
 import estilos from "./Portada.module.css";
 import fondo from "../../assets/imagenes/portada.jpg";
+import { useIdioma } from "../../contexto/IdiomaContext";
 
 function Portada() {
-return (
-    <section
-    id="inicio"
-    className={estilos.portada}
-    style={{ backgroundImage: `url(${fondo})` }}
-    >
-    <div className={estilos.overlay}></div>
+    const { idioma } = useIdioma();
 
-    <div className={estilos.contenido}>
+    return (
+        <section
+            id="inicio"
+            className={estilos.portada}
+            style={{ backgroundImage: `url(${fondo})` }}
+        >
 
-        <div className={estilos.texto}>
+            <div className={estilos.contenido}>
 
-        <span className={estilos.subtitulo}>
-            PRIVATE DRIVER
-        </span>
+                <div className={estilos.texto}>
 
-        <h1>
-            Descubrí
-            <br />
-            Buenos Aires
-        </h1>
+                    <span className={estilos.subtitulo}>
+                    </span>
 
-        <p>
-            Traslados privados, ejecutivos y recorridos personalizados
-            para conocer Buenos Aires con comodidad, seguridad y puntualidad.
-        </p>
+                    <h1>
+                        {idioma === "es" ? (
+                            <>
+                                Descubrí
+                                <br />
+                                Buenos Aires
+                            </>
+                        ) : (
+                            <>
+                                Discover
+                                <br />
+                                Buenos Aires
+                            </>
+                        )}
+                    </h1>
 
-        </div>
+                    <p>
+                        {idioma === "es"
+                            ? "Traslados privados, ejecutivos y recorridos personalizados para conocer Buenos Aires con comodidad, seguridad y puntualidad."
+                            : "Private transfers, executive services and personalized tours to discover Buenos Aires with comfort, safety and punctuality."}
+                    </p>
 
-    </div>
+                </div>
 
-    </section>
-);
+            </div>
+
+        </section>
+    );
 }
 
 export default Portada;

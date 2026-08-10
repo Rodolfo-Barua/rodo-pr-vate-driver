@@ -1,73 +1,99 @@
 import estilos from "./Servicios.module.css";
 
 import {
-FaPlaneDeparture,
-FaCarSide,
-FaLandmark,
+    FaPlaneDeparture,
+    FaCarSide,
+    FaLandmark,
 } from "react-icons/fa";
 
+import { useIdioma } from "../../contexto/IdiomaContext";
+
 function Servicios() {
-return (
-    <section id="servicios" className={estilos.servicios}>
+    const { idioma } = useIdioma();
 
-    <h2>Nuestros Servicios</h2>
+    return (
+        <section id="servicios" className={estilos.servicios}>
 
-    <p className={estilos.subtitulo}>
-        Brindamos un servicio de traslado privado, ejecutivo y turístico,
-        priorizando la puntualidad, el confort y la seguridad.
-    </p>
+            <h2>
+                {idioma === "es"
+                    ? "Nuestros Servicios"
+                    : "Our Services"}
+            </h2>
 
-    <div className={estilos.contenedor}>
+            <p className={estilos.subtitulo}>
+                {idioma === "es"
+                    ? "Brindamos un servicio de traslado privado, ejecutivo y turístico, priorizando la puntualidad, el confort y la seguridad."
+                    : "We provide private, executive and tourist transfer services, prioritizing punctuality, comfort and safety."}
+            </p>
 
-        <div className={estilos.tarjeta}>
+            <div className={estilos.contenedor}>
 
-        <div className={estilos.icono}>
-            <FaPlaneDeparture />
-        </div>
+                <div className={estilos.tarjeta}>
 
-        <h3>Traslados a Aeropuertos</h3>
+                    <div className={estilos.icono}>
+                        <FaPlaneDeparture />
+                    </div>
 
-        <p>
-            Traslados desde y hacia Aeroparque Jorge Newbery y
-            el Aeropuerto Internacional de Ezeiza.
-        </p>
+                    <h3>
+                        {idioma === "es"
+                            ? "Traslados a Aeropuertos"
+                            : "Airport Transfers"}
+                    </h3>
 
-        </div>
+                    <p>
+                        {idioma === "es"
+                            ? "Traslados desde y hacia Aeroparque Jorge Newbery y el Aeropuerto Internacional de Ezeiza."
+                            : "Transfers to and from Jorge Newbery Airport and Ezeiza International Airport."}
+                    </p>
 
-        <div className={estilos.tarjeta}>
+                </div>
 
-        <div className={estilos.icono}>
-            <FaLandmark />
-        </div>
 
-        <h3>Recorridos Turísticos</h3>
+                <div className={estilos.tarjeta}>
 
-        <p>
-            Descubrí los principales atractivos de Buenos Aires
-            con un servicio privado y personalizado.
-        </p>
+                    <div className={estilos.icono}>
+                        <FaLandmark />
+                    </div>
 
-        </div>
+                    <h3>
+                        {idioma === "es"
+                            ? "Recorridos Turísticos"
+                            : "Sightseeing Tours"}
+                    </h3>
 
-        <div className={estilos.tarjeta}>
+                    <p>
+                        {idioma === "es"
+                            ? "Descubrí los principales atractivos de Buenos Aires con un servicio privado y personalizado."
+                            : "Discover the main attractions of Buenos Aires with a private and personalized service."}
+                    </p>
 
-        <div className={estilos.icono}>
-            <FaCarSide />
-        </div>
+                </div>
 
-        <h3>Traslados Privados</h3>
 
-        <p>
-            Viajes ejecutivos, reuniones, hoteles, eventos
-            especiales y traslados dentro de la ciudad.
-        </p>
+                <div className={estilos.tarjeta}>
 
-        </div>
+                    <div className={estilos.icono}>
+                        <FaCarSide />
+                    </div>
 
-    </div>
+                    <h3>
+                        {idioma === "es"
+                            ? "Traslados Privados"
+                            : "Private Transfers"}
+                    </h3>
 
-    </section>
-);
+                    <p>
+                        {idioma === "es"
+                            ? "Viajes ejecutivos, reuniones, hoteles, eventos especiales y traslados dentro de la ciudad."
+                            : "Executive trips, meetings, hotels, special events and transfers throughout the city."}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+    );
 }
 
 export default Servicios;

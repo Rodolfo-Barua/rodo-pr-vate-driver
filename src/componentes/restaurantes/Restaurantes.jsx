@@ -2,72 +2,111 @@ import estilos from "./Restaurantes.module.css";
 import restaurantes from "../../datos/restaurantes";
 
 import { FaMapMarkerAlt, FaCarSide } from "react-icons/fa";
+import { useIdioma } from "../../contexto/IdiomaContext";
 
 function Restaurantes() {
-return (
-    <section id="restaurantes" className={estilos.restaurantes}>
+    const { idioma } = useIdioma();
 
-    <h2>Restaurantes Recomendados</h2>
+    return (
+        <section id="restaurantes" className={estilos.restaurantes}>
 
-    <p className={estilos.subtitulo}>
-        Disfrutá algunas de las mejores propuestas gastronómicas de Buenos Aires.
-    </p>
+            <h2>
+                {idioma === "es"
+                    ? "Restaurantes Recomendados"
+                    : "Recommended Restaurants"}
+            </h2>
 
-    <div className={estilos.contenedor}>
+            <p className={estilos.subtitulo}>
+                {idioma === "es"
+                    ? "Disfrutá algunas de las mejores propuestas gastronómicas de Buenos Aires."
+                    : "Enjoy some of the best dining experiences Buenos Aires has to offer."}
+            </p>
 
-        {restaurantes.map((restaurante) => (
+            <div className={estilos.contenedor}>
 
-        <div className={estilos.tarjeta} key={restaurante.id}>
+                {restaurantes.map((restaurante) => (
 
-            <img
-            src={restaurante.imagen}
-            alt={restaurante.nombre}
-            className={estilos.imagen}
-            />
+                    <div
+                        className={estilos.tarjeta}
+                        key={restaurante.id}
+                    >
 
-            <div className={estilos.info}>
+                        <img
+                            src={restaurante.imagen}
+                            alt={restaurante.nombre}
+                            className={estilos.imagen}
+                        />
 
-            <span className={estilos.categoria}>
-                {restaurante.categoria}
-            </span>
+                        <div className={estilos.info}>
 
-            <h3>{restaurante.nombre}</h3>
+                            <span className={estilos.categoria}>
+                                {idioma === "es"
+                                    ? restaurante.categoria
+                                    : restaurante.categoria === "Parrilla"
+                                        ? "Steakhouse"
+                                        : restaurante.categoria === "Parrilla Premium"
+                                            ? "Premium Steakhouse"
+                                            : restaurante.categoria === "Cocina Argentina"
+                                                ? "Argentine Cuisine"
+                                                : restaurante.categoria === "Cocina Italiana"
+                                                    ? "Italian Cuisine"
+                                                    : restaurante.categoria === "Alta Cocina"
+                                                        ? "Fine Dining"
+                                                        : restaurante.categoria}
+                            </span>
 
-            <p>{restaurante.descripcion}</p>
+                            <h3>{restaurante.nombre}</h3>
 
-            <div className={estilos.botones}>
+                            <p>
+                                {idioma === "es"
+                                    ? restaurante.descripcion
+                                    : restaurante.descripcionEn}
+                            </p>
 
-                <a
-                href={restaurante.maps}
-                target="_blank"
-                rel="noreferrer"
-                className={estilos.ubicacion}
-                >
-                <FaMapMarkerAlt />
-                Ver ubicación
-                </a>
+                            <div className={estilos.botones}>
 
-                <a
-                href={`https://wa.me/5491124627189?text=Hola%20Rodo,%20quisiera%20consultar%20un%20traslado%20a%20${encodeURIComponent(restaurante.nombre)}`}
-                rel="noreferrer"
-                className={estilos.consultar}
-                >
-                <FaCarSide />
-                Consultar traslado
-                </a>
+                                <a
+                                    href={restaurante.maps}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={estilos.ubicacion}
+                                >
+                                    <FaMapMarkerAlt />
+
+                                    {idioma === "es"
+                                        ? "Ver ubicación"
+                                        : "View location"}
+                                </a>
+
+                                <a
+                                    href={`https://wa.me/5491124627189?text=${encodeURIComponent(
+                                        idioma === "es"
+                                            ? `Hola Rodo, quisiera consultar un traslado al restaurante ${restaurante.nombre}.`
+                                            : `Hello Rodo, I would like to inquire about a transfer to ${restaurante.nombre}.`
+                                    )}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={estilos.consultar}
+                                >
+                                    <FaCarSide />
+
+                                    {idioma === "es"
+                                        ? "Consultar traslado"
+                                        : "Request a transfer"}
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                ))}
 
             </div>
 
-            </div>
-
-        </div>
-
-        ))}
-
-    </div>
-
-    </section>
-);
+        </section>
+    );
 }
 
 export default Restaurantes;

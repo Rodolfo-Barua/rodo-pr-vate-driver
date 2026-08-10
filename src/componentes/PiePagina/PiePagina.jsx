@@ -1,103 +1,143 @@
 import estilos from "./PiePagina.module.css";
 
 import {
-FaWhatsapp,
-FaInstagram,
-FaEnvelope,
-FaMapMarkerAlt,
+    FaWhatsapp,
+    FaInstagram,
+    FaEnvelope,
+    FaMapMarkerAlt,
 } from "react-icons/fa";
 
+import { useIdioma } from "../../contexto/IdiomaContext";
+
 function PiePagina() {
-return (
-    <footer className={estilos.footer}>
+    const { idioma } = useIdioma();
 
-    <div className={estilos.contenedor}>
+    return (
+        <footer>
 
-        <div className={estilos.marca}>
+            <div className={estilos.contenedor}>
 
-        <h2>RODO BARUA</h2>
+                <div className={estilos.marca}>
 
-        <span>CONDUCTOR PRIVADO</span>
+                    <h2>RODO BARUA</h2>
 
-        <p>
-            Traslados privados, ejecutivos y turísticos
-            en la Ciudad de Buenos Aires.
-        </p>
+                    <span>
+                        {idioma === "es"
+                            ? "CONDUCTOR PRIVADO"
+                            : "PRIVATE DRIVER"}
+                    </span>
 
-        </div>
+                    <p>
+                        {idioma === "es"
+                            ? "Traslados privados, ejecutivos y turísticos en la Ciudad de Buenos Aires."
+                            : "Private, executive and tourist transfers in the city of Buenos Aires."}
+                    </p>
 
-
-        <div className={estilos.enlaces}>
-
-        <h3>Navegación</h3>
-
-        <a href="#inicio">Inicio</a>
-
-        <a href="#servicios">Servicios</a>
-
-        <a href="#turismo">Turismo</a>
-
-        <a href="#resenas">Reseñas</a>
-
-        <a href="#contacto">Contacto</a>
-
-        </div>
+                </div>
 
 
-        <div className={estilos.contacto}>
+                <div className={estilos.enlaces}>
 
-        <h3>Contacto</h3>
+                    <h3>
+                        {idioma === "es"
+                            ? "Navegación"
+                            : "Navigation"}
+                    </h3>
 
-        <a
-            href="https://wa.me/5491124627189"
-            target="_blank"
-            rel="noreferrer"
-        >
-            <FaWhatsapp />
-            WhatsApp
-        </a>
+                    <a href="#inicio">
+                        {idioma === "es"
+                            ? "Inicio"
+                            : "Home"}
+                    </a>
 
-        <a
-            href="https://www.instagram.com/"
-            target="_blank"
-            rel="noreferrer"
-        >
-            <FaInstagram />
-            Instagram
-        </a>
+                    <a href="#servicios">
+                        {idioma === "es"
+                            ? "Servicios"
+                            : "Services"}
+                    </a>
 
-        <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=rodolfobarua24@gmail.com"
-            target="_blank"
-            rel="noreferrer"
-        >
-            <FaEnvelope />
-            Email
-        </a>
+                    <a href="#turismo">
+                        {idioma === "es"
+                            ? "Turismo"
+                            : "Tourism"}
+                    </a>
 
-        <p>
-            <FaMapMarkerAlt />
-            Buenos Aires, Argentina
-        </p>
+                    <a href="#resenas">
+                        {idioma === "es"
+                            ? "Reseñas"
+                            : "Reviews"}
+                    </a>
 
-        </div>
+                    <a href="#contacto">
+                        {idioma === "es"
+                            ? "Contacto"
+                            : "Contact"}
+                    </a>
 
-    </div>
-
-
-    <div className={estilos.linea}></div>
+                </div>
 
 
-    <div className={estilos.copy}>
+                <div className={estilos.contacto}>
 
-        <p>
-        © 2026 Rodo Private Driver. Todos los derechos reservados.
-        </p>
+                    <h3>
+                        {idioma === "es"
+                            ? "Contacto"
+                            : "Contact"}
+                    </h3>
 
-    </div>
+                    <a
+                        href="https://wa.me/5491124627189"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <FaWhatsapp />
+                        WhatsApp
+                    </a>
 
-    </footer>
-);
+                    <a
+                        href="https://www.instagram.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <FaInstagram />
+                        Instagram
+                    </a>
+
+                    <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=rodolfobarua24@gmail.com"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <FaEnvelope />
+                        Email
+                    </a>
+
+                    <p>
+                        <FaMapMarkerAlt />
+                        Buenos Aires, Argentina
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div className={estilos.linea}></div>
+
+
+            <div className={estilos.copy}>
+
+                <p>
+                    © 2026 Rodo Private Driver.{" "}
+                    {idioma === "es"
+                        ? "Todos los derechos reservados."
+                        : "All rights reserved."}
+                </p>
+
+            </div>
+
+        </footer>
+    );
 }
 
 export default PiePagina;

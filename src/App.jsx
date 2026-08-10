@@ -1,5 +1,7 @@
 import "./App.css";
 
+import { IdiomaProvider } from "./contexto/IdiomaContext";
+
 import Encabezado from "./componentes/Encabezado/Encabezado";
 import Portada from "./componentes/portada/Portada";
 import Servicios from "./componentes/Servicios/Servicios";
@@ -12,31 +14,31 @@ import Contacto from "./componentes/contacto/Contacto";
 import PiePagina from "./componentes/PiePagina/PiePagina";
 
 function App() {
-  return (
-    <>
+    return (
+        <IdiomaProvider>
 
-      <Encabezado />
+            <Encabezado />
 
-      <Portada />
+            <Portada />
 
-      <Servicios />
+            <Servicios />
 
-      <PorqueElegirme />
+            <PorqueElegirme />
 
-      <LugaresTuristicos />
+            <LugaresTuristicos />
 
-      <Restaurantes />
+            <Restaurantes />
 
-      <Cafeterias />
+            <Cafeterias />
 
-      <Resenas />
+            <Resenas />
 
-      <Contacto />
+            <Contacto />
 
-      <PiePagina />
+            <PiePagina />
 
-    </>
-  );
+        </IdiomaProvider>
+    );
 }
 
 export default App;

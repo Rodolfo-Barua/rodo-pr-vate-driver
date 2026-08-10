@@ -1,85 +1,121 @@
 import estilos from "./PorqueElegirme.module.css";
 
 import {
-FaShieldAlt,
-FaClock,
-FaStar,
-FaUserCheck,
+    FaShieldAlt,
+    FaClock,
+    FaStar,
+    FaUserCheck,
 } from "react-icons/fa";
 
+import { useIdioma } from "../../contexto/IdiomaContext";
+
 function PorqueElegirme() {
-return (
-    <section id="porque" className={estilos.porque}>
+    const { idioma } = useIdioma();
 
-    <h2>¿Por qué elegir RODO PRIVATE DRIVER?</h2>
+    return (
+        <section className={estilos.porqueElegirme}>
 
-    <p className={estilos.subtitulo}>
-        Mi compromiso es brindar un servicio seguro, puntual y personalizado,
-        para que disfrutes cada traslado con total tranquilidad.
-    </p>
+            <h2>
+                {idioma === "es"
+                    ? "¿Por qué elegir RODO PRIVATE DRIVER?"
+                    : "Why choose RODO PRIVATE DRIVER?"}
+            </h2>
 
-    <div className={estilos.contenedor}>
+            <p className={estilos.subtitulo}>
+                {idioma === "es"
+                    ? "Mi compromiso es brindar un servicio seguro, puntual y personalizado, para que disfrutes cada traslado con total tranquilidad."
+                    : "My commitment is to provide a safe, punctual and personalized service, so you can enjoy every transfer with complete peace of mind."}
+            </p>
 
-        <div className={estilos.tarjeta}>
+            <div className={estilos.contenedor}>
 
-        <div className={estilos.icono}>
-            <FaShieldAlt />
-        </div>
+                <div className={estilos.tarjeta}>
 
-        <h3>Seguridad</h3>
+                    <div className={estilos.icono}>
+                        <FaShieldAlt />
+                    </div>
 
-        <p>
-            Vehículo habilitado y servicio confiable para que viajes con total tranquilidad.
-        </p>
+                    <h3>
+                        {idioma === "es"
+                            ? "Seguridad"
+                            : "Safety"}
+                    </h3>
 
-        </div>
+                    <p>
+                        {idioma === "es"
+                            ? "Vehículo habilitado y servicio confiable para que viajes con total tranquilidad."
+                            : "Licensed vehicle and reliable service so you can travel with complete peace of mind."}
+                    </p>
 
-        <div className={estilos.tarjeta}>
+                </div>
 
-        <div className={estilos.icono}>
-            <FaClock />
-        </div>
 
-        <h3>Puntualidad</h3>
+                <div className={estilos.tarjeta}>
 
-        <p>
-            Compromiso con los horarios para que llegues siempre a tiempo.
-        </p>
+                    <div className={estilos.icono}>
+                        <FaClock />
+                    </div>
 
-        </div>
+                    <h3>
+                        {idioma === "es"
+                            ? "Puntualidad"
+                            : "Punctuality"}
+                    </h3>
 
-        <div className={estilos.tarjeta}>
+                    <p>
+                        {idioma === "es"
+                            ? "Compromiso con los horarios para que llegues siempre a tiempo."
+                            : "Committed to keeping schedules so you always arrive on time."}
+                    </p>
 
-        <div className={estilos.icono}>
-            <FaStar />
-        </div>
+                </div>
 
-        <h3>10 años de experiencia</h3>
 
-        <p>
-            Más de una década realizando traslados privados, ejecutivos y turísticos.
-        </p>
+                <div className={estilos.tarjeta}>
 
-        </div>
+                    <div className={estilos.icono}>
+                        <FaStar />
+                    </div>
 
-        <div className={estilos.tarjeta}>
+                    <h3>
+                        {idioma === "es"
+                            ? "10 años de experiencia"
+                            : "10 years of experience"}
+                    </h3>
 
-        <div className={estilos.icono}>
-            <FaUserCheck />
-        </div>
+                    <p>
+                        {idioma === "es"
+                            ? "Más de una década realizando traslados privados, ejecutivos y turísticos."
+                            : "More than a decade providing private, executive and tourist transfers."}
+                    </p>
 
-        <h3>Atención personalizada</h3>
+                </div>
 
-        <p>
-            Cada viaje se adapta a las necesidades de cada pasajero para brindar una experiencia única.
-        </p>
 
-        </div>
+                <div className={estilos.tarjeta}>
 
-    </div>
+                    <div className={estilos.icono}>
+                        <FaUserCheck />
+                    </div>
 
-    </section>
-);
+                    <h3>
+                        {idioma === "es"
+                            ? "Atención personalizada"
+                            : "Personalized service"}
+                    </h3>
+
+                    <p>
+                        {idioma === "es"
+                            ? "Cada viaje se adapta a las necesidades de cada pasajero para brindar una experiencia única."
+                            : "Every trip is tailored to each passenger's needs to provide a unique experience."}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+    );
 }
 
 export default PorqueElegirme;

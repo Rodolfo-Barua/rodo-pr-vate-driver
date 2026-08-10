@@ -57,7 +57,7 @@
 
     align-items: center;
 
-    gap: 35px;
+    gap: 30px;
 }
 
 .menu a {
@@ -125,6 +125,57 @@
     background: #EBC14A;
 
     box-shadow: 0 15px 35px rgba(212, 175, 55, .55);
+}
+
+
+/* SELECTOR DE IDIOMA */
+
+.idiomas {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-left: 5px;
+
+    color: rgba(255, 255, 255, .55);
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+.idiomas button {
+    background: transparent;
+
+    border: none;
+
+    padding: 5px 4px;
+
+    color: rgba(255, 255, 255, .65);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    border-radius: 6px;
+}
+
+.idiomas button:hover {
+    color: #D4AF37;
+
+    background: rgba(212, 175, 55, .08);
+}
+
+.idiomas .idiomaActivo {
+    color: #D4AF37;
+
+    font-weight: 700;
 }
 
 
@@ -210,7 +261,7 @@
 
         align-items: center;
 
-        gap: 25px;
+        gap: 22px;
 
         padding: 30px 20px;
 
@@ -254,6 +305,25 @@
         padding: 14px 20px;
 
         margin-top: 5px;
+    }
+
+
+    /* IDIOMAS EN EL MENU */
+
+    .idiomas {
+        margin-left: 0;
+
+        margin-top: 5px;
+
+        gap: 10px;
+
+        font-size: 15px;
+    }
+
+    .idiomas button {
+        font-size: 15px;
+
+        padding: 7px 8px;
     }
 
 }

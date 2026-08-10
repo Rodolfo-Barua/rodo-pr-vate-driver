@@ -2,74 +2,107 @@ import estilos from "./Cafeterias.module.css";
 import cafeterias from "../../datos/cafeterias";
 
 import { FaMapMarkerAlt, FaCoffee } from "react-icons/fa";
+import { useIdioma } from "../../contexto/IdiomaContext";
 
 function Cafeterias() {
-return (
-    <section id="cafeterias" className={estilos.cafeterias}>
+    const { idioma } = useIdioma();
 
-    <h2>Cafeterías Recomendadas</h2>
+    return (
+        <section id="cafeterias" className={estilos.cafeterias}>
 
-    <p className={estilos.subtitulo}>
-        Descubrí algunas de las cafeterías más tradicionales y de especialidad
-        de Buenos Aires.
-    </p>
+            <h2>
+                {idioma === "es"
+                    ? "Cafeterías Recomendadas"
+                    : "Recommended Cafés"}
+            </h2>
 
-    <div className={estilos.contenedor}>
+            <p className={estilos.subtitulo}>
+                {idioma === "es"
+                    ? "Descubrí algunas de las cafeterías más tradicionales y de especialidad de Buenos Aires."
+                    : "Discover some of the most traditional and specialty cafés in Buenos Aires."}
+            </p>
 
-        {cafeterias.map((cafeteria) => (
+            <div className={estilos.contenedor}>
 
-        <div className={estilos.tarjeta} key={cafeteria.id}>
+                {cafeterias.map((cafeteria) => (
 
-            <img
-            src={cafeteria.imagen}
-            alt={cafeteria.nombre}
-            className={estilos.imagen}
-            />
+                    <div
+                        className={estilos.tarjeta}
+                        key={cafeteria.id}
+                    >
 
-            <div className={estilos.info}>
+                        <img
+                            src={cafeteria.imagen}
+                            alt={cafeteria.nombre}
+                            className={estilos.imagen}
+                        />
 
-            <span className={estilos.categoria}>
-                {cafeteria.categoria}
-            </span>
+                        <div className={estilos.info}>
 
-            <h3>{cafeteria.nombre}</h3>
+                            <span className={estilos.categoria}>
+                                {idioma === "es"
+                                    ? cafeteria.categoria
+                                    : cafeteria.categoria === "Café Histórico"
+                                        ? "Historic Café"
+                                        : cafeteria.categoria === "Especialidad"
+                                            ? "Specialty Coffee"
+                                            : cafeteria.categoria === "Coffee House"
+                                                ? "Coffee House"
+                                                : cafeteria.categoria}
+                            </span>
 
-            <p>{cafeteria.descripcion}</p>
+                            <h3>{cafeteria.nombre}</h3>
 
-            <div className={estilos.botones}>
+                            <p>
+                                {idioma === "es"
+                                    ? cafeteria.descripcion
+                                    : cafeteria.descripcionEn}
+                            </p>
 
-                <a
-                href={cafeteria.maps}
-                target="_blank"
-                rel="noreferrer"
-                className={estilos.ubicacion}
-                >
-                <FaMapMarkerAlt />
-                Ver ubicación
-                </a>
+                            <div className={estilos.botones}>
 
-                <a
-                href={`https://wa.me/5491124627189?text=Hola%20Rodo,%20quisiera%20consultar%20un%20traslado%20a%20${encodeURIComponent(cafeteria.nombre)}`}
-                target="_blank"
-                rel="noreferrer"
-                className={estilos.consultar}
-                >
-                <FaCoffee />
-                Consultar traslado
-                </a>
+                                <a
+                                    href={cafeteria.maps}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={estilos.ubicacion}
+                                >
+                                    <FaMapMarkerAlt />
+
+                                    {idioma === "es"
+                                        ? "Ver ubicación"
+                                        : "View location"}
+                                </a>
+
+                                <a
+                                    href={`https://wa.me/5491124627189?text=${encodeURIComponent(
+                                        idioma === "es"
+                                            ? `Hola Rodo, quisiera consultar un traslado a ${cafeteria.nombre}.`
+                                            : `Hello Rodo, I would like to inquire about a transfer to ${cafeteria.nombre}.`
+                                    )}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={estilos.consultar}
+                                >
+                                    <FaCoffee />
+
+                                    {idioma === "es"
+                                        ? "Consultar traslado"
+                                        : "Request a transfer"}
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                ))}
 
             </div>
 
-            </div>
-
-        </div>
-
-        ))}
-
-    </div>
-
-    </section>
-);
+        </section>
+    );
 }
 
 export default Cafeterias;

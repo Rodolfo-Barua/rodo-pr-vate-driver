@@ -2,72 +2,95 @@ import estilos from "./LugaresTuristicos.module.css";
 import lugares from "../../datos/lugares";
 
 import { FaMapMarkerAlt, FaCarSide } from "react-icons/fa";
+import { useIdioma } from "../../contexto/IdiomaContext";
 
 function LugaresTuristicos() {
-return (
-    <section id="turismo" className={estilos.lugares}>
+    const { idioma } = useIdioma();
 
-    <h2>Monumentos y Sitios Icónicos</h2>
+    return (
+        <section id="turismo" className={estilos.lugares}>
 
-    <p className={estilos.subtitulo}>
-        Descubrí algunos de los lugares más emblemáticos de Buenos Aires y
-        consultá tu traslado de forma rápida y sencilla.
-    </p>
+            <h2>
+                {idioma === "es"
+                    ? "Monumentos y Sitios Icónicos"
+                    : "Iconic Landmarks and Places"}
+            </h2>
 
-    <div className={estilos.contenedor}>
+            <p className={estilos.subtitulo}>
+                {idioma === "es"
+                    ? "Descubrí algunos de los lugares más emblemáticos de Buenos Aires y consultá tu traslado de forma rápida y sencilla."
+                    : "Discover some of the most iconic places in Buenos Aires and request your private transfer quickly and easily."}
+            </p>
 
-        {lugares.map((lugar) => (
+            <div className={estilos.contenedor}>
 
-        <div className={estilos.tarjeta} key={lugar.id}>
+                {lugares.map((lugar) => (
 
-            <img
-            src={lugar.imagen}
-            alt={lugar.nombre}
-            className={estilos.imagen}
-            />
+                    <div
+                        className={estilos.tarjeta}
+                        key={lugar.id}
+                    >
 
-            <div className={estilos.info}>
+                        <img
+                            src={lugar.imagen}
+                            alt={lugar.nombre}
+                            className={estilos.imagen}
+                        />
 
-            <h3>{lugar.nombre}</h3>
+                        <div className={estilos.info}>
 
-            <p>{lugar.descripcion}</p>
+                            <h3>{lugar.nombre}</h3>
 
-            <div className={estilos.botones}>
+                            <p>
+                                {idioma === "es"
+                                    ? lugar.descripcion
+                                    : lugar.descripcionEn}
+                            </p>
 
-                <a
-                href={lugar.maps}
-                target="_blank"
-                rel="noreferrer"
-                className={estilos.ubicacion}
-                >
-                <FaMapMarkerAlt />
-                Ver ubicación
-                </a>
+                            <div className={estilos.botones}>
 
-                <a
-                href={`https://wa.me/5491124627189?text=Hola%20Rodo,%20quisiera%20consultar%20un%20traslado%20a%20${encodeURIComponent(
-                lugar.nombre
-                )}`}
-                target="_blank"
-                rel="noreferrer"
-                className={estilos.consultar}
-                >
-                <FaCarSide />
-                Consultar traslado
-                </a>
+                                <a
+                                    href={lugar.maps}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={estilos.ubicacion}
+                                >
+                                    <FaMapMarkerAlt />
+
+                                    {idioma === "es"
+                                        ? "Ver ubicación"
+                                        : "View location"}
+                                </a>
+
+                                <a
+                                    href={`https://wa.me/5491124627189?text=${encodeURIComponent(
+                                        idioma === "es"
+                                            ? `Hola Rodo, quisiera consultar un traslado al ${lugar.nombre}.`
+                                            : `Hello Rodo, I would like to inquire about a transfer to ${lugar.nombre}.`
+                                    )}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={estilos.consultar}
+                                >
+                                    <FaCarSide />
+
+                                    {idioma === "es"
+                                        ? "Consultar traslado"
+                                        : "Request a transfer"}
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                ))}
 
             </div>
 
-            </div>
-
-        </div>
-
-        ))}
-
-    </div>
-
-    </section>
-);
+        </section>
+    );
 }
 
 export default LugaresTuristicos;
