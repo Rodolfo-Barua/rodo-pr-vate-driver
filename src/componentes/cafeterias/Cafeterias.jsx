@@ -49,7 +49,7 @@ return (
                 </a>
 
                 <a
-                href={`https://wa.me/TUNUMERO?text=Hola%20Rodo,%20quisiera%20consultar%20un%20traslado%20a%20${encodeURIComponent(cafeteria.nombre)}`}
+                href={`https://wa.me/5491124627189?text=Hola%20Rodo,%20quisiera%20consultar%20un%20traslado%20a%20${encodeURIComponent(cafeteria.nombre)}`}
                 target="_blank"
                 rel="noreferrer"
                 className={estilos.consultar}
