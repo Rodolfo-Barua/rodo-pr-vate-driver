@@ -17,16 +17,24 @@ function Servicios() {
             <h2>
                 {idioma === "es"
                     ? "Nuestros Servicios"
-                    : "Our Services"}
+                    : idioma === "en"
+                    ? "Our Services"
+                    : "Nossos Serviços"}
             </h2>
+
 
             <p className={estilos.subtitulo}>
                 {idioma === "es"
                     ? "Brindamos un servicio de traslado privado, ejecutivo y turístico, priorizando la puntualidad, el confort y la seguridad."
-                    : "We provide private, executive and tourist transfer services, prioritizing punctuality, comfort and safety."}
+                    : idioma === "en"
+                    ? "We provide private, executive and tourist transfer services, prioritizing punctuality, comfort and safety."
+                    : "Oferecemos serviços de transporte privado, executivo e turístico, priorizando pontualidade, conforto e segurança."}
             </p>
 
+
             <div className={estilos.contenedor}>
+
+                {/* AEROPUERTOS */}
 
                 <div className={estilos.tarjeta}>
 
@@ -37,17 +45,23 @@ function Servicios() {
                     <h3>
                         {idioma === "es"
                             ? "Traslados a Aeropuertos"
-                            : "Airport Transfers"}
+                            : idioma === "en"
+                            ? "Airport Transfers"
+                            : "Traslados para Aeroportos"}
                     </h3>
 
                     <p>
                         {idioma === "es"
                             ? "Traslados desde y hacia Aeroparque Jorge Newbery y el Aeropuerto Internacional de Ezeiza."
-                            : "Transfers to and from Jorge Newbery Airport and Ezeiza International Airport."}
+                            : idioma === "en"
+                            ? "Transfers to and from Jorge Newbery Airport and Ezeiza International Airport."
+                            : "Traslados de ida e volta para o Aeroparque Jorge Newbery e o Aeroporto Internacional de Ezeiza."}
                     </p>
 
                 </div>
 
+
+                {/* TURISMO */}
 
                 <div className={estilos.tarjeta}>
 
@@ -58,17 +72,23 @@ function Servicios() {
                     <h3>
                         {idioma === "es"
                             ? "Recorridos Turísticos"
-                            : "Sightseeing Tours"}
+                            : idioma === "en"
+                            ? "Sightseeing Tours"
+                            : "Passeios Turísticos"}
                     </h3>
 
                     <p>
                         {idioma === "es"
                             ? "Descubrí los principales atractivos de Buenos Aires con un servicio privado y personalizado."
-                            : "Discover the main attractions of Buenos Aires with a private and personalized service."}
+                            : idioma === "en"
+                            ? "Discover the main attractions of Buenos Aires with a private and personalized service."
+                            : "Conheça os principais pontos turísticos de Buenos Aires com um serviço privado e personalizado."}
                     </p>
 
                 </div>
 
+
+                {/* TRASLADOS PRIVADOS */}
 
                 <div className={estilos.tarjeta}>
 
@@ -79,13 +99,17 @@ function Servicios() {
                     <h3>
                         {idioma === "es"
                             ? "Traslados Privados"
-                            : "Private Transfers"}
+                            : idioma === "en"
+                            ? "Private Transfers"
+                            : "Traslados Privados"}
                     </h3>
 
                     <p>
                         {idioma === "es"
                             ? "Viajes ejecutivos, reuniones, hoteles, eventos especiales y traslados dentro de la ciudad."
-                            : "Executive trips, meetings, hotels, special events and transfers throughout the city."}
+                            : idioma === "en"
+                            ? "Executive trips, meetings, hotels, special events and transfers throughout the city."
+                            : "Viagens executivas, reuniões, hotéis, eventos especiais e traslados pela cidade."}
                     </p>
 
                 </div>

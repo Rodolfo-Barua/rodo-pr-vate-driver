@@ -13,14 +13,20 @@ function Cafeterias() {
             <h2>
                 {idioma === "es"
                     ? "Cafeterías Recomendadas"
-                    : "Recommended Cafés"}
+                    : idioma === "en"
+                    ? "Recommended Cafés"
+                    : "Cafés Recomendados"}
             </h2>
+
 
             <p className={estilos.subtitulo}>
                 {idioma === "es"
                     ? "Descubrí algunas de las cafeterías más tradicionales y de especialidad de Buenos Aires."
-                    : "Discover some of the most traditional and specialty cafés in Buenos Aires."}
+                    : idioma === "en"
+                    ? "Discover some of the most traditional and specialty cafés in Buenos Aires."
+                    : "Conheça alguns dos cafés mais tradicionais e especializados de Buenos Aires."}
             </p>
+
 
             <div className={estilos.contenedor}>
 
@@ -37,27 +43,43 @@ function Cafeterias() {
                             className={estilos.imagen}
                         />
 
+
                         <div className={estilos.info}>
 
                             <span className={estilos.categoria}>
+
                                 {idioma === "es"
                                     ? cafeteria.categoria
-                                    : cafeteria.categoria === "Café Histórico"
+                                    : idioma === "en"
+                                    ? cafeteria.categoria === "Café Histórico"
                                         ? "Historic Café"
                                         : cafeteria.categoria === "Especialidad"
-                                            ? "Specialty Coffee"
-                                            : cafeteria.categoria === "Coffee House"
-                                                ? "Coffee House"
-                                                : cafeteria.categoria}
+                                        ? "Specialty Coffee"
+                                        : cafeteria.categoria === "Coffee House"
+                                        ? "Coffee House"
+                                        : cafeteria.categoria
+                                    : cafeteria.categoria === "Café Histórico"
+                                    ? "Café Histórico"
+                                    : cafeteria.categoria === "Especialidad"
+                                    ? "Café Especial"
+                                    : cafeteria.categoria === "Coffee House"
+                                    ? "Coffee House"
+                                    : cafeteria.categoria}
+
                             </span>
 
+
                             <h3>{cafeteria.nombre}</h3>
+
 
                             <p>
                                 {idioma === "es"
                                     ? cafeteria.descripcion
-                                    : cafeteria.descripcionEn}
+                                    : idioma === "en"
+                                    ? cafeteria.descripcionEn
+                                    : cafeteria.descripcionPt}
                             </p>
+
 
                             <div className={estilos.botones}>
 
@@ -71,14 +93,19 @@ function Cafeterias() {
 
                                     {idioma === "es"
                                         ? "Ver ubicación"
-                                        : "View location"}
+                                        : idioma === "en"
+                                        ? "View location"
+                                        : "Ver localização"}
                                 </a>
+
 
                                 <a
                                     href={`https://wa.me/5491124627189?text=${encodeURIComponent(
                                         idioma === "es"
                                             ? `Hola Rodo, quisiera consultar un traslado a ${cafeteria.nombre}.`
-                                            : `Hello Rodo, I would like to inquire about a transfer to ${cafeteria.nombre}.`
+                                            : idioma === "en"
+                                            ? `Hello Rodo, I would like to inquire about a transfer to ${cafeteria.nombre}.`
+                                            : `Olá Rodo, gostaria de consultar um traslado para ${cafeteria.nombre}.`
                                     )}`}
                                     target="_blank"
                                     rel="noreferrer"
@@ -88,7 +115,9 @@ function Cafeterias() {
 
                                     {idioma === "es"
                                         ? "Consultar traslado"
-                                        : "Request a transfer"}
+                                        : idioma === "en"
+                                        ? "Request a transfer"
+                                        : "Consultar traslado"}
                                 </a>
 
                             </div>

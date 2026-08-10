@@ -23,6 +23,7 @@ function Encabezado() {
                 <p>PRIVATE DRIVER</p>
             </div>
 
+
             <button
                 className={estilos.menuBoton}
                 onClick={() => setMenuAbierto(!menuAbierto)}
@@ -31,6 +32,7 @@ function Encabezado() {
                 ☰
             </button>
 
+
             <nav
                 className={`${estilos.menu} ${
                     menuAbierto ? estilos.menuAbierto : ""
@@ -38,24 +40,49 @@ function Encabezado() {
             >
 
                 <a href="#inicio" onClick={cerrarMenu}>
-                    {idioma === "es" ? "Inicio" : "Home"}
+                    {idioma === "es"
+                        ? "Inicio"
+                        : idioma === "en"
+                        ? "Home"
+                        : "Início"}
                 </a>
+
 
                 <a href="#servicios" onClick={cerrarMenu}>
-                    {idioma === "es" ? "Servicios" : "Services"}
+                    {idioma === "es"
+                        ? "Servicios"
+                        : idioma === "en"
+                        ? "Services"
+                        : "Serviços"}
                 </a>
+
 
                 <a href="#turismo" onClick={cerrarMenu}>
-                    {idioma === "es" ? "Turismo" : "Tourism"}
+                    {idioma === "es"
+                        ? "Turismo"
+                        : idioma === "en"
+                        ? "Tourism"
+                        : "Turismo"}
                 </a>
+
 
                 <a href="#resenas" onClick={cerrarMenu}>
-                    {idioma === "es" ? "Reseñas" : "Reviews"}
+                    {idioma === "es"
+                        ? "Reseñas"
+                        : idioma === "en"
+                        ? "Reviews"
+                        : "Avaliações"}
                 </a>
 
+
                 <a href="#contacto" onClick={cerrarMenu}>
-                    {idioma === "es" ? "Contacto" : "Contact"}
+                    {idioma === "es"
+                        ? "Contacto"
+                        : idioma === "en"
+                        ? "Contact"
+                        : "Contato"}
                 </a>
+
 
                 <a
                     href="#contacto"
@@ -64,25 +91,59 @@ function Encabezado() {
                 >
                     {idioma === "es"
                         ? "Consultar traslado"
-                        : "Request a transfer"}
+                        : idioma === "en"
+                        ? "Request a transfer"
+                        : "Solicitar traslado"}
                 </a>
+
 
                 <div className={estilos.idiomas}>
 
                     <button
-                        className={idioma === "es" ? estilos.idiomaActivo : ""}
-                        onClick={() => seleccionarIdioma("es")}
+                        className={
+                            idioma === "es"
+                                ? estilos.idiomaActivo
+                                : ""
+                        }
+                        onClick={() =>
+                            seleccionarIdioma("es")
+                        }
                     >
                         🇦🇷 ES
                     </button>
 
+
                     <span>|</span>
 
+
                     <button
-                        className={idioma === "en" ? estilos.idiomaActivo : ""}
-                        onClick={() => seleccionarIdioma("en")}
+                        className={
+                            idioma === "en"
+                                ? estilos.idiomaActivo
+                                : ""
+                        }
+                        onClick={() =>
+                            seleccionarIdioma("en")
+                        }
                     >
                         🇬🇧 EN
+                    </button>
+
+
+                    <span>|</span>
+
+
+                    <button
+                        className={
+                            idioma === "pt"
+                                ? estilos.idiomaActivo
+                                : ""
+                        }
+                        onClick={() =>
+                            seleccionarIdioma("pt")
+                        }
+                    >
+                        🇧🇷 PT
                     </button>
 
                 </div>

@@ -13,14 +13,20 @@ function LugaresTuristicos() {
             <h2>
                 {idioma === "es"
                     ? "Monumentos y Sitios Icónicos"
-                    : "Iconic Landmarks and Places"}
+                    : idioma === "en"
+                    ? "Iconic Landmarks and Places"
+                    : "Monumentos e Lugares Icônicos"}
             </h2>
+
 
             <p className={estilos.subtitulo}>
                 {idioma === "es"
                     ? "Descubrí algunos de los lugares más emblemáticos de Buenos Aires y consultá tu traslado de forma rápida y sencilla."
-                    : "Discover some of the most iconic places in Buenos Aires and request your private transfer quickly and easily."}
+                    : idioma === "en"
+                    ? "Discover some of the most iconic places in Buenos Aires and request your private transfer quickly and easily."
+                    : "Conheça alguns dos lugares mais emblemáticos de Buenos Aires e solicite seu traslado de forma rápida e fácil."}
             </p>
+
 
             <div className={estilos.contenedor}>
 
@@ -37,15 +43,20 @@ function LugaresTuristicos() {
                             className={estilos.imagen}
                         />
 
+
                         <div className={estilos.info}>
 
                             <h3>{lugar.nombre}</h3>
 
+
                             <p>
                                 {idioma === "es"
                                     ? lugar.descripcion
-                                    : lugar.descripcionEn}
+                                    : idioma === "en"
+                                    ? lugar.descripcionEn
+                                    : lugar.descripcionPt}
                             </p>
+
 
                             <div className={estilos.botones}>
 
@@ -59,14 +70,19 @@ function LugaresTuristicos() {
 
                                     {idioma === "es"
                                         ? "Ver ubicación"
-                                        : "View location"}
+                                        : idioma === "en"
+                                        ? "View location"
+                                        : "Ver localização"}
                                 </a>
+
 
                                 <a
                                     href={`https://wa.me/5491124627189?text=${encodeURIComponent(
                                         idioma === "es"
                                             ? `Hola Rodo, quisiera consultar un traslado al ${lugar.nombre}.`
-                                            : `Hello Rodo, I would like to inquire about a transfer to ${lugar.nombre}.`
+                                            : idioma === "en"
+                                            ? `Hello Rodo, I would like to inquire about a transfer to ${lugar.nombre}.`
+                                            : `Olá Rodo, gostaria de consultar um traslado para ${lugar.nombre}.`
                                     )}`}
                                     target="_blank"
                                     rel="noreferrer"
@@ -76,7 +92,9 @@ function LugaresTuristicos() {
 
                                     {idioma === "es"
                                         ? "Consultar traslado"
-                                        : "Request a transfer"}
+                                        : idioma === "en"
+                                        ? "Request a transfer"
+                                        : "Consultar traslado"}
                                 </a>
 
                             </div>

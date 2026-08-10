@@ -26,9 +26,15 @@ function Portada() {
                                 <br />
                                 Buenos Aires
                             </>
-                        ) : (
+                        ) : idioma === "en" ? (
                             <>
                                 Discover
+                                <br />
+                                Buenos Aires
+                            </>
+                        ) : (
+                            <>
+                                Descubra
                                 <br />
                                 Buenos Aires
                             </>
@@ -38,7 +44,9 @@ function Portada() {
                     <p>
                         {idioma === "es"
                             ? "Traslados privados, ejecutivos y recorridos personalizados para conocer Buenos Aires con comodidad, seguridad y puntualidad."
-                            : "Private transfers, executive services and personalized tours to discover Buenos Aires with comfort, safety and punctuality."}
+                            : idioma === "en"
+                            ? "Private transfers, executive services and personalized tours to discover Buenos Aires with comfort, safety and punctuality."
+                            : "Traslados privados, serviços executivos e passeios personalizados para conhecer Buenos Aires com conforto, segurança e pontualidade."}
                     </p>
 
                 </div>

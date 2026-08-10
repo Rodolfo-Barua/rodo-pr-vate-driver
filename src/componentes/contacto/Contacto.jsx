@@ -12,6 +12,10 @@ function Contacto() {
         equipaje: "",
         fecha: "",
         hora: "",
+        sillaBebe: "no",
+        espera: "no",
+        tiempoEspera: "",
+        paradas: [],
         mensaje: "",
     });
 
@@ -24,8 +28,58 @@ function Contacto() {
         });
     };
 
+    const cambiarParada = (index, value) => {
+        const nuevasParadas = [...formulario.paradas];
+
+        nuevasParadas[index] = value;
+
+        setFormulario({
+            ...formulario,
+            paradas: nuevasParadas,
+        });
+    };
+
+    const agregarParada = () => {
+        setFormulario({
+            ...formulario,
+            paradas: [...formulario.paradas, ""],
+        });
+    };
+
+    const eliminarParada = (index) => {
+        const nuevasParadas = formulario.paradas.filter(
+            (_, i) => i !== index
+        );
+
+        setFormulario({
+            ...formulario,
+            paradas: nuevasParadas,
+        });
+    };
+
     const enviarWhatsApp = (e) => {
         e.preventDefault();
+
+        const textoParadas =
+            formulario.paradas.length > 0
+                ? formulario.paradas
+                      .map(
+                          (parada, index) =>
+                              `${index + 1}. ${
+                                  parada ||
+                                  (idioma === "es"
+                                      ? "No especificada"
+                                      : idioma === "en"
+                                      ? "Not specified"
+                                      : "Não especificada")
+                              }`
+                      )
+                      .join("\n")
+                : idioma === "es"
+                ? "Sin paradas adicionales."
+                : idioma === "en"
+                ? "No additional stops."
+                : "Sem paradas adicionais.";
 
         const texto =
             idioma === "es"
@@ -38,9 +92,25 @@ function Contacto() {
 📅 Fecha: ${formulario.fecha}
 🕐 Hora: ${formulario.hora}
 
+👶 Silla para bebé: ${
+                      formulario.sillaBebe === "si" ? "Sí" : "No"
+                  }
+
+⏱️ Viaje con espera: ${
+                      formulario.espera === "si" ? "Sí" : "No"
+                  }${
+                      formulario.espera === "si"
+                          ? `\n⏱️ Tiempo de espera solicitado: ${formulario.tiempoEspera} minutos`
+                          : ""
+                  }
+
+📍 Paradas adicionales:
+${textoParadas}
+
 💬 Mensaje:
 ${formulario.mensaje || "Sin mensaje adicional."}`
-                : `Hello Rodo, I would like to request a transfer quote.
+                : idioma === "en"
+                ? `Hello Rodo, I would like to request a transfer quote.
 
 📍 Pickup: ${formulario.inicio}
 📍 Destination: ${formulario.destino}
@@ -49,8 +119,49 @@ ${formulario.mensaje || "Sin mensaje adicional."}`
 📅 Date: ${formulario.fecha}
 🕐 Time: ${formulario.hora}
 
+👶 Baby seat: ${
+                      formulario.sillaBebe === "si" ? "Yes" : "No"
+                  }
+
+⏱️ Waiting service: ${
+                      formulario.espera === "si" ? "Yes" : "No"
+                  }${
+                      formulario.espera === "si"
+                          ? `\n⏱️ Requested waiting time: ${formulario.tiempoEspera} minutes`
+                          : ""
+                  }
+
+📍 Additional stops:
+${textoParadas}
+
 💬 Message:
-${formulario.mensaje || "No additional message."}`;
+${formulario.mensaje || "No additional message."}`
+                : `Olá Rodo, gostaria de solicitar um orçamento de traslado.
+
+📍 Local de partida: ${formulario.inicio}
+📍 Destino: ${formulario.destino}
+👥 Passageiros: ${formulario.pasajeros}
+🧳 Bagagem: ${formulario.equipaje || "Não especificada"}
+📅 Data: ${formulario.fecha}
+🕐 Horário: ${formulario.hora}
+
+👶 Cadeira para bebê: ${
+                      formulario.sillaBebe === "si" ? "Sim" : "Não"
+                  }
+
+⏱️ Serviço com espera: ${
+                      formulario.espera === "si" ? "Sim" : "Não"
+                  }${
+                      formulario.espera === "si"
+                          ? `\n⏱️ Tempo de espera solicitado: ${formulario.tiempoEspera} minutos`
+                          : ""
+                  }
+
+📍 Paradas adicionais:
+${textoParadas}
+
+💬 Mensagem:
+${formulario.mensaje || "Sem mensagem adicional."}`;
 
         const mensajeCodificado = encodeURIComponent(texto);
 
@@ -66,26 +177,35 @@ ${formulario.mensaje || "No additional message."}`;
             <h2>
                 {idioma === "es"
                     ? "Solicitá tu presupuesto"
-                    : "Request Your Quote"}
+                    : idioma === "en"
+                    ? "Request Your Quote"
+                    : "Solicite seu orçamento"}
             </h2>
 
             <p className={estilos.subtitulo}>
                 {idioma === "es"
                     ? "Completá los datos de tu traslado y enviá la solicitud directamente por WhatsApp."
-                    : "Fill in your transfer details and send your request directly via WhatsApp."}
+                    : idioma === "en"
+                    ? "Fill in your transfer details and send your request directly via WhatsApp."
+                    : "Preencha os dados do seu traslado e envie sua solicitação diretamente pelo WhatsApp."}
             </p>
+
 
             <form
                 className={estilos.formulario}
                 onSubmit={enviarWhatsApp}
             >
 
+                {/* INICIO */}
+
                 <div className={estilos.grupo}>
 
                     <label htmlFor="inicio">
                         {idioma === "es"
                             ? "Lugar de inicio"
-                            : "Pickup location"}
+                            : idioma === "en"
+                            ? "Pickup location"
+                            : "Local de partida"}
                     </label>
 
                     <input
@@ -95,7 +215,9 @@ ${formulario.mensaje || "No additional message."}`;
                         placeholder={
                             idioma === "es"
                                 ? "Ej: Aeroparque"
-                                : "e.g. Jorge Newbery Airport"
+                                : idioma === "en"
+                                ? "e.g. Jorge Newbery Airport"
+                                : "Ex: Aeroparque"
                         }
                         value={formulario.inicio}
                         onChange={manejarCambio}
@@ -105,12 +227,16 @@ ${formulario.mensaje || "No additional message."}`;
                 </div>
 
 
+                {/* DESTINO */}
+
                 <div className={estilos.grupo}>
 
                     <label htmlFor="destino">
                         {idioma === "es"
                             ? "Destino"
-                            : "Destination"}
+                            : idioma === "en"
+                            ? "Destination"
+                            : "Destino"}
                     </label>
 
                     <input
@@ -120,7 +246,9 @@ ${formulario.mensaje || "No additional message."}`;
                         placeholder={
                             idioma === "es"
                                 ? "Ej: Hotel en Palermo"
-                                : "e.g. Hotel in Palermo"
+                                : idioma === "en"
+                                ? "e.g. Hotel in Palermo"
+                                : "Ex: Hotel em Palermo"
                         }
                         value={formulario.destino}
                         onChange={manejarCambio}
@@ -130,6 +258,8 @@ ${formulario.mensaje || "No additional message."}`;
                 </div>
 
 
+                {/* PASAJEROS Y EQUIPAJE */}
+
                 <div className={estilos.fila}>
 
                     <div className={estilos.grupo}>
@@ -137,7 +267,9 @@ ${formulario.mensaje || "No additional message."}`;
                         <label htmlFor="pasajeros">
                             {idioma === "es"
                                 ? "Cantidad de pasajeros"
-                                : "Number of passengers"}
+                                : idioma === "en"
+                                ? "Number of passengers"
+                                : "Quantidade de passageiros"}
                         </label>
 
                         <input
@@ -145,7 +277,11 @@ ${formulario.mensaje || "No additional message."}`;
                             name="pasajeros"
                             type="number"
                             min="1"
-                            placeholder="Ej: 2"
+                            placeholder={
+                                idioma === "pt"
+                                    ? "Ex: 2"
+                                    : "Ej: 2"
+                            }
                             value={formulario.pasajeros}
                             onChange={manejarCambio}
                             required
@@ -159,7 +295,9 @@ ${formulario.mensaje || "No additional message."}`;
                         <label htmlFor="equipaje">
                             {idioma === "es"
                                 ? "Equipaje"
-                                : "Luggage"}
+                                : idioma === "en"
+                                ? "Luggage"
+                                : "Bagagem"}
                         </label>
 
                         <input
@@ -169,7 +307,9 @@ ${formulario.mensaje || "No additional message."}`;
                             placeholder={
                                 idioma === "es"
                                     ? "Ej: 2 valijas"
-                                    : "e.g. 2 suitcases"
+                                    : idioma === "en"
+                                    ? "e.g. 2 suitcases"
+                                    : "Ex: 2 malas"
                             }
                             value={formulario.equipaje}
                             onChange={manejarCambio}
@@ -180,6 +320,8 @@ ${formulario.mensaje || "No additional message."}`;
                 </div>
 
 
+                {/* FECHA Y HORA */}
+
                 <div className={estilos.fila}>
 
                     <div className={estilos.grupo}>
@@ -187,7 +329,9 @@ ${formulario.mensaje || "No additional message."}`;
                         <label htmlFor="fecha">
                             {idioma === "es"
                                 ? "Fecha"
-                                : "Date"}
+                                : idioma === "en"
+                                ? "Date"
+                                : "Data"}
                         </label>
 
                         <input
@@ -207,7 +351,9 @@ ${formulario.mensaje || "No additional message."}`;
                         <label htmlFor="hora">
                             {idioma === "es"
                                 ? "Hora"
-                                : "Time"}
+                                : idioma === "en"
+                                ? "Time"
+                                : "Horário"}
                         </label>
 
                         <input
@@ -224,12 +370,221 @@ ${formulario.mensaje || "No additional message."}`;
                 </div>
 
 
+                {/* SILLA PARA BEBÉ */}
+
+                <div className={estilos.grupo}>
+
+                    <label htmlFor="sillaBebe">
+                        {idioma === "es"
+                            ? "👶 Silla para bebé"
+                            : idioma === "en"
+                            ? "👶 Baby seat"
+                            : "👶 Cadeira para bebê"}
+                    </label>
+
+                    <select
+                        id="sillaBebe"
+                        name="sillaBebe"
+                        value={formulario.sillaBebe}
+                        onChange={manejarCambio}
+                    >
+
+                        <option value="no">
+                            {idioma === "es"
+                                ? "No necesito"
+                                : idioma === "en"
+                                ? "I don't need one"
+                                : "Não preciso"}
+                        </option>
+
+                        <option value="si">
+                            {idioma === "es"
+                                ? "Sí, necesito silla para bebé"
+                                : idioma === "en"
+                                ? "Yes, I need a baby seat"
+                                : "Sim, preciso de uma cadeira para bebê"}
+                        </option>
+
+                    </select>
+
+                    <small>
+                        {idioma === "es"
+                            ? "Sujeto a disponibilidad. Solicitar con anticipación."
+                            : idioma === "en"
+                            ? "Subject to availability. Please request in advance."
+                            : "Sujeito à disponibilidade. Solicite com antecedência."}
+                    </small>
+
+                </div>
+
+
+                {/* VIAJE CON ESPERA */}
+
+                <div className={estilos.grupo}>
+
+                    <label htmlFor="espera">
+                        {idioma === "es"
+                            ? "⏱️ Viaje con espera"
+                            : idioma === "en"
+                            ? "⏱️ Waiting service"
+                            : "⏱️ Serviço com espera"}
+                    </label>
+
+                    <select
+                        id="espera"
+                        name="espera"
+                        value={formulario.espera}
+                        onChange={manejarCambio}
+                    >
+
+                        <option value="no">
+                            {idioma === "es"
+                                ? "No"
+                                : idioma === "en"
+                                ? "No"
+                                : "Não"}
+                        </option>
+
+                        <option value="si">
+                            {idioma === "es"
+                                ? "Sí, necesito que el conductor espere"
+                                : idioma === "en"
+                                ? "Yes, I need the driver to wait"
+                                : "Sim, preciso que o motorista aguarde"}
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                {/* TIEMPO DE ESPERA */}
+
+                {formulario.espera === "si" && (
+
+                    <div className={estilos.grupo}>
+
+                        <label htmlFor="tiempoEspera">
+                            {idioma === "es"
+                                ? "Tiempo estimado de espera"
+                                : idioma === "en"
+                                ? "Estimated waiting time"
+                                : "Tempo estimado de espera"}
+                        </label>
+
+                        <input
+                            id="tiempoEspera"
+                            name="tiempoEspera"
+                            type="number"
+                            min="1"
+                            placeholder={
+                                idioma === "es"
+                                    ? "Ej: 30 minutos"
+                                    : idioma === "en"
+                                    ? "e.g. 30 minutes"
+                                    : "Ex: 30 minutos"
+                            }
+                            value={formulario.tiempoEspera}
+                            onChange={manejarCambio}
+                            required
+                        />
+
+                    </div>
+
+                )}
+
+
+                {/* PARADAS */}
+
+                <div className={estilos.grupo}>
+
+                    <label>
+                        {idioma === "es"
+                            ? "📍 Paradas adicionales"
+                            : idioma === "en"
+                            ? "📍 Additional stops"
+                            : "📍 Paradas adicionais"}
+                    </label>
+
+
+                    {formulario.paradas.length === 0 && (
+
+                        <p>
+                            {idioma === "es"
+                                ? "No se agregaron paradas."
+                                : idioma === "en"
+                                ? "No additional stops added."
+                                : "Nenhuma parada adicionada."}
+                        </p>
+
+                    )}
+
+
+                    {formulario.paradas.map((parada, index) => (
+
+                        <div
+                            className={estilos.parada}
+                            key={index}
+                        >
+
+                            <input
+                                type="text"
+                                placeholder={
+                                    idioma === "es"
+                                        ? `Parada ${index + 1}`
+                                        : idioma === "en"
+                                        ? `Stop ${index + 1}`
+                                        : `Parada ${index + 1}`
+                                }
+                                value={parada}
+                                onChange={(e) =>
+                                    cambiarParada(
+                                        index,
+                                        e.target.value
+                                    )
+                                }
+                                required
+                            />
+
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    eliminarParada(index)
+                                }
+                            >
+                                ✕
+                            </button>
+
+                        </div>
+
+                    ))}
+
+
+                    <button
+                        type="button"
+                        className={estilos.botonParada}
+                        onClick={agregarParada}
+                    >
+                        {idioma === "es"
+                            ? "+ Agregar parada"
+                            : idioma === "en"
+                            ? "+ Add stop"
+                            : "+ Adicionar parada"}
+                    </button>
+
+                </div>
+
+
+                {/* MENSAJE */}
+
                 <div className={estilos.grupo}>
 
                     <label htmlFor="mensaje">
                         {idioma === "es"
                             ? "Mensaje adicional"
-                            : "Additional message"}
+                            : idioma === "en"
+                            ? "Additional message"
+                            : "Mensagem adicional"}
                     </label>
 
                     <textarea
@@ -239,7 +594,9 @@ ${formulario.mensaje || "No additional message."}`;
                         placeholder={
                             idioma === "es"
                                 ? "¿Necesitás alguna indicación especial?"
-                                : "Do you need any special arrangements?"
+                                : idioma === "en"
+                                ? "Do you need any special arrangements?"
+                                : "Você precisa de alguma indicação especial?"
                         }
                         value={formulario.mensaje}
                         onChange={manejarCambio}
@@ -248,13 +605,17 @@ ${formulario.mensaje || "No additional message."}`;
                 </div>
 
 
+                {/* BOTÓN */}
+
                 <button
                     type="submit"
                     className={estilos.boton}
                 >
                     {idioma === "es"
                         ? "Solicitar presupuesto por WhatsApp"
-                        : "Request a quote via WhatsApp"}
+                        : idioma === "en"
+                        ? "Request a quote via WhatsApp"
+                        : "Solicitar orçamento pelo WhatsApp"}
                 </button>
 
             </form>

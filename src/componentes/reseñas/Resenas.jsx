@@ -1,57 +1,12 @@
-import { useState } from "react";
 import estilos from "./Resenas.module.css";
+import { FaGoogle } from "react-icons/fa";
 import { useIdioma } from "../../contexto/IdiomaContext";
 
 function Resenas() {
     const { idioma } = useIdioma();
 
-    const [reseña, setReseña] = useState({
-        nombre: "",
-        pais: "",
-        calificacion: "5",
-        comentario: "",
-    });
-
-    const manejarCambio = (e) => {
-        const { name, value } = e.target;
-
-        setReseña({
-            ...reseña,
-            [name]: value,
-        });
-    };
-
-    const enviarReseña = (e) => {
-        e.preventDefault();
-
-        const estrellas = "⭐".repeat(Number(reseña.calificacion));
-
-        const texto =
-            idioma === "es"
-                ? `Hola Rodo, quiero dejar una reseña sobre mi experiencia con Rodo Private Driver.
-
-👤 Nombre: ${reseña.nombre}
-🌎 País: ${reseña.pais || "No especificado"}
-⭐ Calificación: ${estrellas}
-
-💬 Reseña:
-${reseña.comentario}`
-                : `Hello Rodo, I would like to leave a review about my experience with Rodo Private Driver.
-
-👤 Name: ${reseña.nombre}
-🌎 Country: ${reseña.pais || "Not specified"}
-⭐ Rating: ${estrellas}
-
-💬 Review:
-${reseña.comentario}`;
-
-        const mensajeCodificado = encodeURIComponent(texto);
-
-        window.open(
-            `https://wa.me/5491124627189?text=${mensajeCodificado}`,
-            "_blank"
-        );
-    };
+    const enlaceGoogle =
+        "https://g.page/r/CeQvh_hHwCQnEAE/review";
 
     return (
         <section id="resenas" className={estilos.resenas}>
@@ -59,14 +14,20 @@ ${reseña.comentario}`;
             <h2>
                 {idioma === "es"
                     ? "Lo que dicen nuestros pasajeros"
-                    : "What Our Passengers Say"}
+                    : idioma === "en"
+                    ? "What Our Passengers Say"
+                    : "O que dizem nossos passageiros"}
             </h2>
+
 
             <p className={estilos.subtitulo}>
                 {idioma === "es"
-                    ? "Muy pronto compartiremos las experiencias de quienes hayan confiado en Rodo Private Driver."
-                    : "Soon we will share the experiences of those who have trusted Rodo Private Driver."}
+                    ? "Tu opinión es muy importante para nosotros. Si viajaste con Rodo Private Driver, nos encantaría conocer tu experiencia."
+                    : idioma === "en"
+                    ? "Your opinion is very important to us. If you traveled with Rodo Private Driver, we would love to hear about your experience."
+                    : "Sua opinião é muito importante para nós. Se você viajou com a Rodo Private Driver, gostaríamos muito de conhecer sua experiência."}
             </p>
+
 
             <div className={estilos.contenedor}>
 
@@ -76,153 +37,54 @@ ${reseña.comentario}`;
                         ★★★★★
                     </div>
 
+
+                    <h3>
+                        {idioma === "es"
+                            ? "¿Viajaste con nosotros?"
+                            : idioma === "en"
+                            ? "Did you travel with us?"
+                            : "Você viajou conosco?"}
+                    </h3>
+
+
                     <p>
                         {idioma === "es"
-                            ? "Tu experiencia puede formar parte de esta sección."
-                            : "Your experience can be part of this section."}
+                            ? "Dejanos tu opinión directamente en Google y ayudá a otros pasajeros a conocer nuestro servicio."
+                            : idioma === "en"
+                            ? "Leave your review directly on Google and help other passengers discover our service."
+                            : "Deixe sua avaliação diretamente no Google e ajude outros passageiros a conhecer nosso serviço."}
                     </p>
 
-                    <span className={estilos.pais}>
+
+                    <a
+                        href={enlaceGoogle}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={estilos.botonGoogle}
+                    >
+                        <FaGoogle />
+
                         {idioma === "es"
-                            ? "Esperamos tu reseña"
-                            : "We look forward to your review"}
-                    </span>
+                            ? "Dejar una reseña en Google"
+                            : idioma === "en"
+                            ? "Leave a Google review"
+                            : "Deixar uma avaliação no Google"}
+                    </a>
 
                 </div>
 
             </div>
 
-            <div className={estilos.formularioResena}>
 
-                <h3>
-                    {idioma === "es"
-                        ? "¿Viajaste con nosotros?"
-                        : "Did you travel with us?"}
-                </h3>
+            <div className={estilos.mensajeResena}>
 
                 <p>
                     {idioma === "es"
-                        ? "Nos gustaría conocer tu experiencia."
-                        : "We would love to hear about your experience."}
+                        ? "⭐ Gracias por confiar en Rodo Private Driver."
+                        : idioma === "en"
+                        ? "⭐ Thank you for choosing Rodo Private Driver."
+                        : "⭐ Obrigado por escolher a Rodo Private Driver."}
                 </p>
-
-                <form onSubmit={enviarReseña}>
-
-                    <div className={estilos.grupoResena}>
-
-                        <label htmlFor="nombre">
-                            {idioma === "es" ? "Nombre" : "Name"}
-                        </label>
-
-                        <input
-                            id="nombre"
-                            name="nombre"
-                            type="text"
-                            placeholder={
-                                idioma === "es"
-                                    ? "Tu nombre"
-                                    : "Your name"
-                            }
-                            value={reseña.nombre}
-                            onChange={manejarCambio}
-                            required
-                        />
-
-                    </div>
-
-                    <div className={estilos.grupoResena}>
-
-                        <label htmlFor="pais">
-                            {idioma === "es" ? "País" : "Country"}
-                        </label>
-
-                        <input
-                            id="pais"
-                            name="pais"
-                            type="text"
-                            placeholder={
-                                idioma === "es"
-                                    ? "Ej: Argentina"
-                                    : "e.g. Argentina"
-                            }
-                            value={reseña.pais}
-                            onChange={manejarCambio}
-                        />
-
-                    </div>
-
-                    <div className={estilos.grupoResena}>
-
-                        <label htmlFor="calificacion">
-                            {idioma === "es"
-                                ? "Calificación"
-                                : "Rating"}
-                        </label>
-
-                        <select
-                            id="calificacion"
-                            name="calificacion"
-                            value={reseña.calificacion}
-                            onChange={manejarCambio}
-                        >
-                            <option value="5">
-                                ★★★★★ - {idioma === "es" ? "Excelente" : "Excellent"}
-                            </option>
-
-                            <option value="4">
-                                ★★★★☆ - {idioma === "es" ? "Muy bueno" : "Very good"}
-                            </option>
-
-                            <option value="3">
-                                ★★★☆☆ - {idioma === "es" ? "Bueno" : "Good"}
-                            </option>
-
-                            <option value="2">
-                                ★★☆☆☆ - {idioma === "es" ? "Regular" : "Fair"}
-                            </option>
-
-                            <option value="1">
-                                ★☆☆☆☆ - {idioma === "es" ? "Malo" : "Poor"}
-                            </option>
-                        </select>
-
-                    </div>
-
-                    <div className={estilos.grupoResena}>
-
-                        <label htmlFor="comentario">
-                            {idioma === "es"
-                                ? "Tu experiencia"
-                                : "Your experience"}
-                        </label>
-
-                        <textarea
-                            id="comentario"
-                            name="comentario"
-                            rows="5"
-                            placeholder={
-                                idioma === "es"
-                                    ? "Contanos cómo fue tu experiencia..."
-                                    : "Tell us about your experience..."
-                            }
-                            value={reseña.comentario}
-                            onChange={manejarCambio}
-                            required
-                        />
-
-                    </div>
-
-                    <button
-                        type="submit"
-                        className={estilos.botonResena}
-                    >
-                        ⭐{" "}
-                        {idioma === "es"
-                            ? "Enviar mi reseña por WhatsApp"
-                            : "Send my review via WhatsApp"}
-                    </button>
-
-                </form>
 
             </div>
 
