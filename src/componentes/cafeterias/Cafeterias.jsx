@@ -37,13 +37,6 @@ function Cafeterias() {
                         key={cafeteria.id}
                     >
 
-                        <img
-                            src={cafeteria.imagen}
-                            alt={cafeteria.nombre}
-                            className={estilos.imagen}
-                        />
-
-
                         <div className={estilos.info}>
 
                             <span className={estilos.categoria}>

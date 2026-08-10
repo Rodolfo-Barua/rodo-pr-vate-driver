@@ -24,7 +24,7 @@ function LugaresTuristicos() {
                     ? "Descubrí algunos de los lugares más emblemáticos de Buenos Aires y consultá tu traslado de forma rápida y sencilla."
                     : idioma === "en"
                     ? "Discover some of the most iconic places in Buenos Aires and request your private transfer quickly and easily."
-                    : "Conheça alguns dos lugares mais emblemáticos de Buenos Aires e solicite seu traslado de forma rápida e fácil."}
+                    : "Descubra alguns dos lugares mais emblemáticos de Buenos Aires e consulte seu traslado de forma rápida e fácil."}
             </p>
 
 
@@ -37,24 +37,16 @@ function LugaresTuristicos() {
                         key={lugar.id}
                     >
 
-                        <img
-                            src={lugar.imagen}
-                            alt={lugar.nombre}
-                            className={estilos.imagen}
-                        />
-
-
                         <div className={estilos.info}>
 
                             <h3>{lugar.nombre}</h3>
-
 
                             <p>
                                 {idioma === "es"
                                     ? lugar.descripcion
                                     : idioma === "en"
                                     ? lugar.descripcionEn
-                                    : lugar.descripcionPt}
+                                    : lugar.descripcionPt || lugar.descripcion}
                             </p>
 
 
