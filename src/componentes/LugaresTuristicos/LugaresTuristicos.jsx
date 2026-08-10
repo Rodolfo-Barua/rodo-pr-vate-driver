@@ -45,8 +45,8 @@ return (
                 </a>
 
                 <a
-                href={`https://wa.me/9541124627189?text=Hola%20Rodo,%20quisiera%20consultar%20un%20traslado%20a%20${encodeURIComponent(
-                    lugar.nombre
+                href={`https://wa.me/5491124627189?text=Hola%20Rodo,%20quisiera%20consultar%20un%20traslado%20a%20${encodeURIComponent(
+                lugar.nombre
                 )}`}
                 target="_blank"
                 rel="noreferrer"
